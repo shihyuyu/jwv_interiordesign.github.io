@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>九維室內設計 | JWV Design - 簡約現代版</title>
+  <meta name="description" content="九維室內設計 - 以質感、輕奢華風格打造專屬空間。室內設計、軟裝規劃、品牌空間整合服務。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/styles.css">
+  <style>
+    /* 簡約現代風格覆蓋 */
+    .hero {
+      grid-template-columns: 1fr;
+      text-align: center;
+      padding: 120px 0 80px;
+    }
+    .hero-media {
+      display: none;
+    }
+    .section-intro .section-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+    .work-style-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 60px;
+    }
+    .work-style-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .contact-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+    /* 移除動畫 */
+    .site-header,
+    .hero-copy,
+    .hero-copy h1,
+    .hero-copy p,
+    .hero-actions,
+    .media-card,
+    .section-intro,
+    .section-services,
+    .works-grid,
+    .contact-panel {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="brand-logo" aria-label="九維室內設計品牌標誌">
+        <img class="brand-logo-image" src="./assets/logo.svg" alt="九維室內設計 logo">
+        <div class="brand-wordmark">
+          <p class="brand-chinese">九維室內設計</p>
+          <p class="brand-english">J W V D E S I G N</p>
+        </div>
+      </div>
+      <nav class="site-nav">
+        <a href="#about">品牌</a>
+        <a href="#services">服務</a>
+        <a href="#works">作品</a>
+        <a href="#contact">聯繫</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">室內設計 / 空間品牌</p>
+          <h1>質感演繹，輕奢生活美學</h1>
+          <p>九維室內設計專注於現代雅緻與高級工藝的融合，為每一個家居與商業空間注入沉穩而精緻的格調。</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#contact">立即洽詢</a>
+            <a class="button button-outline" href="#works">作品集</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-intro" id="about">
+        <div class="section-grid">
+          <div>
+            <p class="section-label">品牌故事</p>
+            <h2>內蘊深度，彈性空間語彙</h2>
+            <p>從細節選材到色彩節奏，九維室內設計將空間視為生活的延伸。以溫潤灰階與深棕調性的語言，喚醒靈動與安定並存的空間氛圍。</p>
+          </div>
+          <div class="info-grid">
+            <div>
+              <h3>空間定位</h3>
+              <p>客製化空間規劃，建立品牌與居者之間的高質感對話。</p>
+            </div>
+            <div>
+              <h3>材質選擇</h3>
+              <p>融合自然石材、皮革、絲絨與金屬，構築輕奢卻不張揚的設計。</p>
+            </div>
+            <div>
+              <h3>服務整合</h3>
+              <p>涵蓋室內設計、裝修監理、軟裝搭配與品牌識別空間提案。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-services" id="services">
+        <p class="section-label">服務項目</p>
+        <h2>我們的專長</h2>
+        <div class="services-grid">
+          <article>
+            <h3>住宅設計</h3>
+            <p>打造寧靜且層次豐富的私人領域，讓日常生活自然而然流露質感魅力。</p>
+          </article>
+          <article>
+            <h3>商業空間</h3>
+            <p>結合品牌精神與動線需求，創造兼具識別性與舒適度的商業場域。</p>
+          </article>
+          <article>
+            <h3>軟裝佈局</h3>
+            <p>透過色彩、紋理與照明配置，提升空間氛圍，讓每一角落都成為美學焦點。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-works" id="works">
+        <div class="works-intro">
+          <p class="section-label">代表作品</p>
+          <h2>三種風格，三種空間語彙</h2>
+        </div>
+        <div class="work-style-grid">
+          <article class="work-style-card">
+            <div class="work-style-copy">
+              <p>居家現代</p>
+              <h3>溫潤木質與深棕線條</h3>
+              <p>融合木質暖度與現代俐落線條，打造舒適且重質感的居家場域。</p>
+            </div>
+            <div class="work-style-carousel" data-carousel>
+              <div class="work-style-track">
+                <img src="./img/collection/01_1.jpg" alt="作品風格一 圖片 1">
+                <img src="./img/collection/01_2.jpg" alt="作品風格一 圖片 2">
+                <img src="./img/collection/01_3.jpg" alt="作品風格一 圖片 3">
+                <img src="./img/collection/01_4.jpg" alt="作品風格一 圖片 4">
+              </div>
+              <button type="button" class="carousel-button prev" aria-label="上一張">&#8249;</button>
+              <button type="button" class="carousel-button next" aria-label="下一張">&#8250;</button>
+              <div class="carousel-dots"></div>
+            </div>
+          </article>
+
+          <article class="work-style-card">
+            <div class="work-style-copy">
+              <p>商務沈穩</p>
+              <h3>高級會客與辦公空間</h3>
+              <p>以深色木紋、石材與低調金屬，呈現專業、沉穩與高端質感。</p>
+            </div>
+            <div class="work-style-carousel" data-carousel>
+              <div class="work-style-track">
+                <img src="./img/collection/02_1.jpg" alt="作品風格二 圖片 1">
+                <img src="./img/collection/02_2.jpg" alt="作品風格二 圖片 2">
+                <img src="./img/collection/02_3.jpg" alt="作品風格二 圖片 3">
+              </div>
+              <button type="button" class="carousel-button prev" aria-label="上一張">&#8249;</button>
+              <button type="button" class="carousel-button next" aria-label="下一張">&#8250;</button>
+              <div class="carousel-dots"></div>
+            </div>
+          </article>
+
+          <article class="work-style-card">
+            <div class="work-style-copy">
+              <p>輕奢雅居</p>
+              <h3>精緻細節與自然材質</h3>
+              <p>結合石材、絲絨與柔和光影，打造雅緻而不張揚的高質感生活場景。</p>
+            </div>
+            <div class="work-style-carousel" data-carousel>
+              <div class="work-style-track">
+                <img src="./img/collection/03_1.jpg" alt="作品風格三 圖片 1">
+                <img src="./img/collection/03_2.jpg" alt="作品風格三 圖片 2">
+                <img src="./img/collection/03_3.jpg" alt="作品風格三 圖片 3">
+              </div>
+              <button type="button" class="carousel-button prev" aria-label="上一張">&#8249;</button>
+              <button type="button" class="carousel-button next" aria-label="下一張">&#8250;</button>
+              <div class="carousel-dots"></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-contact" id="contact">
+        <div class="contact-panel">
+          <div>
+            <p class="section-label">聯繫我們</p>
+            <h2>讓九維為您定義專屬空間</h2>
+            <p>歡迎預約設計諮詢，或提供需求讓我們為您規劃專屬空間提案。</p>
+            <div class="contact-info">
+              <div><strong>地址</strong><span>台北市中山區</span></div>
+              <div><strong>電話</strong><span>02-1234-5678</span></div>
+              <div><strong>Email</strong><span>hello@jwvdesign.tw</span></div>
+            </div>
+          </div>
+          <form class="contact-form">
+            <label>姓名<input type="text" placeholder="您的姓名"></label>
+            <label>Email<input type="email" placeholder="example@mail.com"></label>
+            <label>需求簡述<textarea rows="4" placeholder="請簡要描述您的空間需求"></textarea></label>
+            <button type="submit" class="button button-primary">送出需求</button>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="./assets/scripts.js" defer></script>
+</body>
+</html>

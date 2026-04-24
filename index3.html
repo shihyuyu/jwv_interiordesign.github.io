@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>九維室內設計 | 輕奢設計的藝術專業</title>
+  <meta name="description" content="質感演繹，輕奢生活美學 - 九維室內設計以現代雅緻為核心，提供高級工藝的空間解決方案。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: #f8f6f3;
+      color: #2c2a29;
+    }
+
+    .data-header {
+      background: linear-gradient(135deg, #1a1817 0%, #2c2a29 100%);
+      color: white;
+      padding: 4rem 0 6rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .data-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    }
+
+    .data-title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, #fff 0%, #d4b08a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .data-subtitle {
+      font-size: 1.3rem;
+      opacity: 0.9;
+      margin-bottom: 3rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .stat-card {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255,255,255,0.15);
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #d4b08a;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section {
+      padding: 6rem 0;
+    }
+
+    .section-title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 4rem;
+      color: #2c2a29;
+    }
+
+    .process-section {
+      background: white;
+      border-radius: 24px;
+      margin: -3rem 0 6rem;
+      padding: 6rem 0;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .process-flow {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      position: relative;
+    }
+
+    .process-flow::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #6d302c 0%, #d4b08a 50%, #6d302c 100%);
+      z-index: 1;
+    }
+
+    .process-step {
+      background: white;
+      border: 2px solid #e8e3dd;
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      transition: all 0.3s ease;
+    }
+
+    .process-step:hover {
+      border-color: #6d302c;
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(109,48,44,0.1);
+    }
+
+    .process-number {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(45deg, #6d302c 0%, #8b3a34 100%);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 auto 1.5rem;
+    }
+
+    .process-title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: #2c2a29;
+    }
+
+    .process-desc {
+      color: #6f6a64;
+      line-height: 1.6;
+    }
+
+    .metrics-section {
+      background: linear-gradient(135deg, #f8f6f3 0%, #f0ede8 100%);
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+    }
+
+    .metric-card {
+      background: white;
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      border: 1px solid rgba(109,48,44,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+    }
+
+    .metric-chart {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 2rem;
+      position: relative;
+    }
+
+    .metric-circle {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: conic-gradient(#6d302c 0% 75%, #e8e3dd 75% 100%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .metric-circle::before {
+      content: '';
+      position: absolute;
+      width: 80%;
+      height: 80%;
+      background: white;
+      border-radius: 50%;
+    }
+
+    .metric-percentage {
+      position: relative;
+      z-index: 1;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #6d302c;
+    }
+
+    .metric-title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: #2c2a29;
+    }
+
+    .metric-desc {
+      color: #6f6a64;
+      line-height: 1.6;
+    }
+
+    .testimonials-section {
+      background: white;
+    }
+
+    .testimonials-slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #f8f6f3 0%, #f0ede8 100%);
+      padding: 4rem 2rem;
+    }
+
+    .testimonial {
+      display: none;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .testimonial.active {
+      display: block;
+    }
+
+    .testimonial-quote {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.5rem;
+      font-style: italic;
+      color: #2c2a29;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .testimonial-author {
+      font-weight: 600;
+      color: #6d302c;
+      margin-bottom: 0.5rem;
+    }
+
+    .testimonial-project {
+      color: #6f6a64;
+      font-size: 0.9rem;
+    }
+
+    .testimonial-nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .testimonial-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #e8e3dd;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .testimonial-dot.active {
+      background: #6d302c;
+      transform: scale(1.2);
+    }
+
+    .certifications-section {
+      background: linear-gradient(135deg, #2c2a29 0%, #1a1817 100%);
+      color: white;
+    }
+
+    .certifications-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .certification-card {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .certification-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .certification-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(45deg, #d4b08a 0%, #f0e6d8 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .certification-title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #d4b08a;
+    }
+
+    .certification-desc {
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+      font-size: 0.9rem;
+    }
+
+    .cta-section {
+      background: linear-gradient(135deg, #6d302c 0%, #8b3a34 100%);
+      color: white;
+      text-align: center;
+      padding: 6rem 0;
+    }
+
+    .cta-title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 3rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-form {
+      max-width: 500px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .cta-input {
+      padding: 1rem;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      font-size: 1rem;
+    }
+
+    .cta-input::placeholder {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .cta-input:focus {
+      outline: none;
+      border-color: white;
+    }
+
+    .cta-button {
+      grid-column: 1 / -1;
+      padding: 1rem;
+      background: white;
+      color: #6d302c;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    @media (max-width: 768px) {
+      .process-flow {
+        grid-template-columns: 1fr;
+      }
+
+      .process-flow::before {
+        display: none;
+      }
+
+      .cta-form {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 數據導向的開場 -->
+  <header class="data-header">
+    <div class="container">
+      <h1 class="data-title">輕奢設計的藝術專業</h1>
+      <p class="data-subtitle">以質感為基礎，以美學為準則，九維室內設計為您打造現代雅緻的高級空間</p>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-number">300+</span>
+          <span class="stat-label">精品專案</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">95%</span>
+          <span class="stat-label">客戶滿意度</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">12+</span>
+          <span class="stat-label">年設計經驗</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">25+</span>
+          <span class="stat-label">設計獎項</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 設計流程 -->
+  <section class="process-section">
+    <div class="container">
+      <h2 class="section-title">精緻化的設計流程</h2>
+      <div class="process-flow">
+        <div class="process-step">
+          <div class="process-number">01</div>
+          <h3 class="process-title">需求探討</h3>
+          <p class="process-desc">深入了解客戶的生活方式與品味偏好，挖掘空間潛力與設計機會。</p>
+        </div>
+        <div class="process-step">
+          <div class="process-number">02</div>
+          <h3 class="process-title">風格定位</h3>
+          <p class="process-desc">基於現代雅緻理念，融合輕奢元素，創造獨特而精緻的空間概念。</p>
+        </div>
+        <div class="process-step">
+          <div class="process-number">03</div>
+          <h3 class="process-title">工藝實現</h3>
+          <p class="process-desc">選用頂級材料與工藝技術，確保每一個細節都達到高級品質標準。</p>
+        </div>
+        <div class="process-step">
+          <div class="process-number">04</div>
+          <h3 class="process-title">品味驗證</h3>
+          <p class="process-desc">項目完成後進行品質檢驗與客戶回饋，持續完善設計服務品質。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 關鍵指標 -->
+  <section class="metrics-section section">
+    <div class="container">
+      <h2 class="section-title">設計品質指標</h2>
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-chart">
+            <div class="metric-circle"></div>
+            <span class="metric-percentage">90%</span>
+          </div>
+          <h3 class="metric-title">空間美學提升</h3>
+          <p class="metric-desc">通過精緻的設計手法，平均提升空間美學品質90%，創造高級生活體驗。</p>
+        </div>
+        <div class="metric-card">
+          <div class="metric-chart">
+            <div class="metric-circle" style="background: conic-gradient(#6d302c 0% 95%, #e8e3dd 95% 100%);"></div>
+            <span class="metric-percentage">95%</span>
+          </div>
+          <h3 class="metric-title">品質完工率</h3>
+          <p class="metric-desc">嚴格的工藝管控確保95%的專案達到高級品質標準，超越客戶期待。</p>
+        </div>
+        <div class="metric-card">
+          <div class="metric-chart">
+            <div class="metric-circle" style="background: conic-gradient(#6d302c 0% 88%, #e8e3dd 88% 100%);"></div>
+            <span class="metric-percentage">88%</span>
+          </div>
+          <h3 class="metric-title">預算精準度</h3>
+          <p class="metric-desc">精準的成本規劃，88%的專案預算控制在合理範圍內，實現價值最大化。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 客戶見證 -->
+  <section class="testimonials-section section">
+    <div class="container">
+      <h2 class="section-title">客戶品味見證</h2>
+      <div class="testimonials-slider">
+        <div class="testimonial active">
+          <blockquote class="testimonial-quote">
+            "九維的輕奢設計理念讓我們的別墅充滿了現代雅緻的氣質，每一個細節都彰顯著高級品味。"
+          </blockquote>
+          <div class="testimonial-author">陳董</div>
+          <div class="testimonial-project">豪宅別墅設計</div>
+        </div>
+        <div class="testimonial">
+          <blockquote class="testimonial-quote">
+            "從風格定位到最終呈現，九維讓我們體驗到了真正的設計藝術。空間不僅美觀，更有靈魂。"
+          </blockquote>
+          <div class="testimonial-author">林設計總監</div>
+          <div class="testimonial-project">精品展示空間</div>
+        </div>
+        <div class="testimonial">
+          <blockquote class="testimonial-quote">
+            "精緻化的設計流程和頂級工藝讓我們對項目品質完全放心，結果遠超預期。"
+          </blockquote>
+          <div class="testimonial-author">黃總裁</div>
+          <div class="testimonial-project">旗艦店面設計</div>
+        </div>
+      </div>
+      <div class="testimonial-nav">
+        <div class="testimonial-dot active" data-slide="0"></div>
+        <div class="testimonial-dot" data-slide="1"></div>
+        <div class="testimonial-dot" data-slide="2"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 專業認證 -->
+  <section class="certifications-section section">
+    <div class="container">
+      <h2 class="section-title" style="color: white;">專業認證與資質</h2>
+      <div class="certifications-grid">
+        <div class="certification-card">
+          <div class="certification-icon">🏆</div>
+          <h3 class="certification-title">IFDA認證</h3>
+          <p class="certification-desc">國際室內設計師聯盟認證，確保專業設計水準符合國際標準。</p>
+        </div>
+        <div class="certification-card">
+          <div class="certification-icon">🎯</div>
+          <h3 class="certification-title">ISO 9001</h3>
+          <p class="certification-desc">品質管理系統認證，保證服務流程的系統化和標準化。</p>
+        </div>
+        <div class="certification-card">
+          <div class="certification-icon">🔬</div>
+          <h3 class="certification-title">綠建築認證</h3>
+          <p class="certification-desc">專業綠建築設計能力，打造永續發展的環保空間。</p>
+        </div>
+        <div class="certification-card">
+          <div class="certification-icon">📊</div>
+          <h3 class="certification-title">BIM技術</h3>
+          <p class="certification-desc">建築資訊模型技術應用，實現精準的3D設計和施工管理。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 行動號召 -->
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="cta-title">讓質感演繹您的生活美學</h2>
+      <p class="cta-subtitle">加入300+滿意客戶行列，體驗輕奢設計的藝術魅力</p>
+      <form class="cta-form">
+        <input type="text" class="cta-input" placeholder="您的姓名" required>
+        <input type="email" class="cta-input" placeholder="電子郵件" required>
+        <input type="tel" class="cta-input" placeholder="聯絡電話" required>
+        <button type="submit" class="cta-button">獲取免費設計諮詢</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- 頁面底部 -->
+  <footer style="background: #2c2a29; color: white; padding: 3rem 0; text-align: center;">
+    <div class="container">
+      <div style="margin-bottom: 2rem;">
+        <h3 style="font-family: 'Noto Serif TC', serif; font-size: 1.5rem; margin-bottom: 1rem; color: #d4b08a;">九維室內設計</h3>
+        <p style="opacity: 0.8; max-width: 600px; margin: 0 auto; line-height: 1.6;">
+          專注於現代雅緻與高級工藝的融合，為每一個家居與商業空間注入沉穩而精緻的格調。
+        </p>
+      </div>
+      <div style="display: flex; justify-content: center; gap: 3rem; margin-bottom: 2rem; flex-wrap: wrap;">
+        <div>
+          <strong style="color: #d4b08a;">地址</strong><br>
+          <span>台北市中山區</span>
+        </div>
+        <div>
+          <strong style="color: #d4b08a;">電話</strong><br>
+          <span>02-1234-5678</span>
+        </div>
+        <div>
+          <strong style="color: #d4b08a;">Email</strong><br>
+          <span>hello@jwvdesign.tw</span>
+        </div>
+      </div>
+      <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; opacity: 0.6;">
+        <p>&copy; 2024 九維室內設計 JWV Design. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 見證輪播
+    let currentTestimonial = 0;
+    const testimonials = document.querySelectorAll('.testimonial');
+    const dots = document.querySelectorAll('.testimonial-dot');
+
+    function showTestimonial(index) {
+      testimonials.forEach(testimonial => testimonial.classList.remove('active'));
+      dots.forEach(dot => dot.classList.remove('active'));
+
+      testimonials[index].classList.add('active');
+      dots[index].classList.add('active');
+      currentTestimonial = index;
+    }
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => showTestimonial(index));
+    });
+
+    // 自動輪播
+    setInterval(() => {
+      currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+      showTestimonial(currentTestimonial);
+    }, 5000);
+
+    // 動畫效果
+    const observerOptions = {
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.metric-card, .process-step, .certification-card').forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      card.style.transition = 'all 0.6s ease';
+      observer.observe(card);
+    });
+  </script>
+</body>
+</html>

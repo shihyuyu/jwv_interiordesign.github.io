@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>九維室內設計 | 空間蛻變之旅</title>
+  <meta name="description" content="體驗九維室內設計的空間蛻變之旅 - 從概念到實現，每一個細節都訴說著故事。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      overflow-x: hidden;
+      background: #000;
+    }
+
+    .story-section {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      overflow: hidden;
+    }
+
+    .story-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.5s ease;
+    }
+
+    .story-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(0,0,0,0.7) 0%, rgba(109,48,44,0.3) 100%);
+    }
+
+    .story-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .story-title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, #fff 0%, #f0e6d8 50%, #d4b08a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+    }
+
+    .story-subtitle {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    .story-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .story-cta {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: linear-gradient(45deg, #6d302c 0%, #8b3a34 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 32px rgba(109,48,44,0.3);
+    }
+
+    .story-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 48px rgba(109,48,44,0.4);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 36px;
+      border: 2px solid rgba(255,255,255,0.5);
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .scroll-indicator::after {
+      content: '';
+      width: 4px;
+      height: 8px;
+      background: white;
+      border-radius: 2px;
+      animation: scrollBounce 2s infinite;
+    }
+
+    @keyframes scrollBounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(8px); }
+      60% { transform: translateY(4px); }
+    }
+
+    .journey-section {
+      padding: 5rem 0;
+      background: #f8f4ef;
+      position: relative;
+    }
+
+    .journey-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .journey-title {
+      text-align: center;
+      font-family: 'Noto Serif TC', serif;
+      font-size: 3rem;
+      color: #2c2a29;
+      margin-bottom: 4rem;
+    }
+
+    .journey-timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .timeline-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, #6d302c 0%, #d4b08a 100%);
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 4rem;
+      display: flex;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .timeline-item:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .timeline-content {
+      width: 45%;
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      border: 1px solid rgba(109,48,44,0.1);
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+      margin-left: auto;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 20px;
+      height: 20px;
+      background: #6d302c;
+      border: 4px solid white;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 4px 16px rgba(109,48,44,0.3);
+    }
+
+    .timeline-step {
+      font-size: 0.9rem;
+      color: #6d302c;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .timeline-title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.5rem;
+      color: #2c2a29;
+      margin-bottom: 1rem;
+    }
+
+    .timeline-desc {
+      color: #6f6a64;
+      line-height: 1.6;
+    }
+
+    .transformation-section {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, #2c2a29 0%, #1a1817 100%);
+    }
+
+    .transformation-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      text-align: center;
+      color: white;
+    }
+
+    .transformation-title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 2rem;
+      background: linear-gradient(45deg, #d4b08a 0%, #f0e6d8 50%, #fff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .transformation-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .transformation-card {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .transformation-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .transformation-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(45deg, #6d302c 0%, #8b3a34 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .transformation-name {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: #d4b08a;
+    }
+
+    .transformation-desc {
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+    }
+
+    .contact-section {
+      padding: 5rem 0;
+      background: #f8f4ef;
+      text-align: center;
+    }
+
+    .contact-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .contact-title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 2.5rem;
+      color: #2c2a29;
+      margin-bottom: 1rem;
+    }
+
+    .contact-subtitle {
+      color: #6f6a64;
+      font-size: 1.1rem;
+      margin-bottom: 3rem;
+      line-height: 1.6;
+    }
+
+    .contact-form {
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+      border: 1px solid rgba(109,48,44,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #2c2a29;
+      font-weight: 500;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid #e8e3dd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #6d302c;
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(45deg, #6d302c 0%, #8b3a34 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .form-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(109,48,44,0.3);
+    }
+
+    @media (max-width: 768px) {
+      .timeline-item {
+        flex-direction: column !important;
+      }
+
+      .timeline-content {
+        width: 100% !important;
+        margin-left: 0 !important;
+      }
+
+      .timeline-dot {
+        left: 2rem !important;
+      }
+
+      .timeline-line {
+        left: 2rem !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 沉浸式開場 -->
+  <section class="story-section" id="hero">
+    <div class="story-bg" style="background-image: url('./img/innovative1_bg01.jpg');"></div>
+    <div class="story-content">
+      <h1 class="story-title">空間蛻變之旅</h1>
+      <p class="story-subtitle">從夢想到實現，每一個角落都訴說故事</p>
+      <p class="story-text">九維室內設計不只是空間規劃師，更是您生活故事的詮釋者。我們相信，每一個空間都承載著獨特的情感與記憶。</p>
+      <a href="#journey" class="story-cta">開始探索</a>
+    </div>
+    <div class="scroll-indicator"></div>
+  </section>
+
+  <!-- 設計旅程時間軸 -->
+  <section class="journey-section" id="journey">
+    <div class="journey-container">
+      <h2 class="journey-title">設計的藝術之旅</h2>
+      <div class="journey-timeline">
+        <div class="timeline-line"></div>
+
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-step">階段一</div>
+            <h3 class="timeline-title">聆聽您的故事</h3>
+            <p class="timeline-desc">深入了解您的生活方式、品味偏好與空間需求。我們相信，每一個設計都應該從心開始。</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-step">階段二</div>
+            <h3 class="timeline-title">空間的對話</h3>
+            <p class="timeline-desc">將您的故事轉化為空間語言。透過色彩、材質與光影，創造出能夠述說情感的環境。</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-step">階段三</div>
+            <h3 class="timeline-title">工藝的精髓</h3>
+            <p class="timeline-desc">選用頂級材質，結合傳統工藝與現代技術。每一道工序都承載著對完美的堅持。</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-step">階段四</div>
+            <h3 class="timeline-title">生活的誕生</h3>
+            <p class="timeline-desc">當空間完成的那一刻，新的生活篇章就此展開。每一個細節都為您的故事增添光彩。</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 蛻變展示 -->
+  <section class="transformation-section">
+    <div class="transformation-content">
+      <h2 class="transformation-title">空間蛻變的藝術</h2>
+      <div class="transformation-grid">
+        <div class="transformation-card">
+          <div class="transformation-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 3L2 7V17L12 21L22 17V7L12 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          </div>
+          <h3 class="transformation-name">家的溫暖</h3>
+          <p class="transformation-desc">將冰冷的空間轉化為溫暖的港灣，讓每一次回家都成為心靈的療癒時刻。</p>
+        </div>
+        <div class="transformation-card">
+          <div class="transformation-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 3L2 7V17L12 21L22 17V7L12 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg></div>
+          <h3 class="transformation-name">品牌的靈魂</h3>
+          <p class="transformation-desc">為您的品牌打造獨特的空間識別，讓顧客一進門就感受到品牌的價值與溫度。</p>
+        </div>
+        <div class="transformation-card">
+          <div class="transformation-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 3L2 7V17L12 21L22 17V7L12 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg></div>
+          <h3 class="transformation-name">夢想的實現</h3>
+          <p class="transformation-desc">將您的夢想空間變為現實，讓每一個設計決定都成為您故事的一部分。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 聯繫區塊 -->
+  <section class="contact-section" id="contact">
+    <div class="contact-container">
+      <h2 class="contact-title">開始您的蛻變之旅</h2>
+      <p class="contact-subtitle">讓我們一起創造屬於您的獨特空間故事</p>
+      <form class="contact-form">
+        <div class="form-group">
+          <label class="form-label" for="name">您的姓名</label>
+          <input type="text" id="name" name="name" class="form-input" placeholder="請輸入您的姓名">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">電子郵件</label>
+          <input type="email" id="email" name="email" class="form-input" placeholder="example@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="message">您的空間故事</label>
+          <textarea id="message" name="message" class="form-input form-textarea" placeholder="請分享您的空間需求與夢想..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">開始對話</button>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    // 視差滾動效果
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const storyBg = document.querySelector('.story-bg');
+      storyBg.style.transform = `translateY(${scrolled * 0.5}px)`;
+    });
+
+    // 時間軸動畫
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.timeline-item').forEach(item => {
+      observer.observe(item);
+    });
+  </script>
+</body>
+</html>
