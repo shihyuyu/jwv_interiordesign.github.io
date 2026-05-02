@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作品集 | 九維室內設計</title>
+  <meta name="description" content="九維室內設計作品集 - 居家現代、商務沈穩、輕奢雅居三大風格系列。精緻空間設計案例展示。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/styles.css">
+  <style>
+    /* 作品集頁面專用樣式 */
+    .portfolio-hero {
+      text-align: center;
+      padding: 80px 0 60px;
+      opacity: 0;
+      animation: fadeSlideUp 0.9s ease forwards;
+      animation-delay: 0.15s;
+    }
+
+    .portfolio-hero h1 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 2.8rem;
+      font-weight: 600;
+      margin: 24px 0 16px;
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+
+    .portfolio-hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .portfolio-filter {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin: 60px 0 80px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeSlideUp 0.9s ease forwards;
+      animation-delay: 0.3s;
+    }
+
+    .filter-btn {
+      padding: 12px 28px;
+      border: 2px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 4px;
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .filter-btn.active {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 48px;
+      margin-bottom: 100px;
+    }
+
+    .portfolio-item {
+      opacity: 0;
+      animation: fadeSlideUp 0.6s ease forwards;
+      transition: all 0.3s ease;
+    }
+
+    .portfolio-item.hidden {
+      display: none;
+    }
+
+    .portfolio-item-image {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      aspect-ratio: 4/3;
+      background: var(--surface-soft);
+      margin-bottom: 24px;
+    }
+
+    .portfolio-item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .portfolio-item:hover .portfolio-item-image img {
+      transform: scale(1.05);
+    }
+
+    .portfolio-item-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(44, 42, 41, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .portfolio-item:hover .portfolio-item-overlay {
+      opacity: 1;
+    }
+
+    .overlay-btn {
+      padding: 10px 24px;
+      background: white;
+      color: var(--accent);
+      border: none;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .overlay-btn:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    .portfolio-item-content h3 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin: 0 0 12px;
+      color: var(--text);
+    }
+
+    .portfolio-item-category {
+      display: inline-block;
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .portfolio-item-desc {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 12px 0 0;
+    }
+
+    .portfolio-item-meta {
+      display: flex;
+      gap: 24px;
+      margin-top: 16px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* 詳情頁面 */
+    .portfolio-detail {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(44, 42, 41, 0.8);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      overflow-y: auto;
+      padding: 32px 16px;
+    }
+
+    .portfolio-detail.active {
+      display: flex;
+    }
+
+    .detail-modal {
+      background: white;
+      border-radius: 8px;
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: fadeSlideUp 0.3s ease;
+    }
+
+    .detail-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      background: rgba(44, 42, 41, 0.1);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 24px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .detail-close:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    .detail-gallery {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .detail-gallery img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .detail-content {
+      padding: 48px;
+    }
+
+    .detail-header h2 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      margin: 0 0 12px;
+      color: var(--text);
+    }
+
+    .detail-category {
+      display: inline-block;
+      font-size: 0.85rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 24px;
+    }
+
+    .detail-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      margin: 32px 0;
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .info-block h4 {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0 0 8px;
+      font-weight: 600;
+    }
+
+    .info-block p {
+      font-size: 1rem;
+      color: var(--text);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .detail-description {
+      margin: 32px 0;
+      color: var(--text);
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    .detail-highlights {
+      background: var(--surface-soft);
+      padding: 24px;
+      border-radius: 8px;
+      margin: 32px 0;
+    }
+
+    .detail-highlights h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0 0 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .highlights-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .highlights-list li {
+      padding: 8px 0;
+      color: var(--text);
+      font-size: 0.95rem;
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .highlights-list li:before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* 響應式設計 */
+    @media (max-width: 768px) {
+      .portfolio-hero h1 {
+        font-size: 2rem;
+      }
+
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .portfolio-filter {
+        gap: 8px;
+      }
+
+      .filter-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+
+      .detail-content {
+        padding: 32px 20px;
+      }
+
+      .detail-header h2 {
+        font-size: 1.6rem;
+      }
+
+      .detail-info {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 24px 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .portfolio-hero {
+        padding: 40px 0 30px;
+      }
+
+      .portfolio-hero h1 {
+        font-size: 1.5rem;
+      }
+
+      .portfolio-hero p {
+        font-size: 0.95rem;
+      }
+
+      .detail-modal {
+        max-height: 95vh;
+        border-radius: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="brand-logo" aria-label="九維室內設計品牌標誌">
+        <img class="brand-logo-image" src="./assets/logo.svg" alt="九維室內設計 logo">
+        <div class="brand-wordmark">
+          <p class="brand-chinese">九維室內設計</p>
+          <p class="brand-english">J W V D E S I G N</p>
+        </div>
+      </div>
+      <nav class="site-nav">
+        <a href="./index.html">首頁</a>
+        <a href="./index.html#about">品牌</a>
+        <a href="./portfolio.html">作品</a>
+        <a href="./index.html#contact">聯繫</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- 作品集英雄區 -->
+      <section class="portfolio-hero">
+        <p class="eyebrow">代表作品</p>
+        <h1>設計作品集</h1>
+        <p>每一個項目都是九維對品味生活的詮釋。通過精選的案例展示，感受我們如何將空間美學與生活品質完美融合。</p>
+      </section>
+
+      <!-- 篩選按鈕 -->
+      <div class="portfolio-filter">
+        <button class="filter-btn active" data-filter="all">全部</button>
+        <button class="filter-btn" data-filter="residential">居家現代</button>
+        <button class="filter-btn" data-filter="commercial">商務沈穩</button>
+        <button class="filter-btn" data-filter="luxury">輕奢雅居</button>
+      </div>
+
+      <!-- 作品網格 -->
+      <div class="portfolio-grid" id="portfolioGrid">
+        <!-- 居家現代 - 案例1 -->
+        <article class="portfolio-item" data-category="residential">
+          <div class="portfolio-item-image">
+            <img src="./img/collection/01_1.jpg" alt="青山雅居 - 主客廳">
+            <div class="portfolio-item-overlay">
+              <button class="overlay-btn" data-project-id="01">檢視詳情</button>
+            </div>
+          </div>
+          <div class="portfolio-item-content">
+            <p class="portfolio-item-category">居家現代</p>
+            <h3>青山雅居</h3>
+            <p class="portfolio-item-desc">融合溫潤木質與現代俐落線條，打造兼具舒適與質感的居家場域。重點運用深棕色系與自然光影營造層次感。</p>
+            <div class="portfolio-item-meta">
+              <span class="meta-item">📍 台北市信義區</span>
+              <span class="meta-item">45坪</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 居家現代 - 案例2 -->
+        <article class="portfolio-item" data-category="residential">
+          <div class="portfolio-item-image">
+            <img src="./img/collection/01_2.jpg" alt="木色時光 - 客房">
+            <div class="portfolio-item-overlay">
+              <button class="overlay-btn" data-project-id="02">檢視詳情</button>
+            </div>
+          </div>
+          <div class="portfolio-item-content">
+            <p class="portfolio-item-category">居家現代</p>
+            <h3>木色時光</h3>
+            <p class="portfolio-item-desc">以橡木與灰色系為主調，搭配低調的金屬配件。每個角落都體現了對細節的堅持，讓居家成為靜謐的避風港。</p>
+            <div class="portfolio-item-meta">
+              <span class="meta-item">📍 台北市內湖區</span>
+              <span class="meta-item">68坪</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 居家現代 - 案例3 -->
+        <article class="portfolio-item" data-category="residential">
+          <div class="portfolio-item-image">
+            <img src="./img/collection/01_3.jpg" alt="漫步空間 - 書房">
+            <div class="portfolio-item-overlay">
+              <button class="overlay-btn" data-project-id="03">檢視詳情</button>
+            </div>
+          </div>
+          <div class="portfolio-item-content">
+            <p class="portfolio-item-category">居家現代</p>
+            <h3>漫步空間</h3>
+            <p class="portfolio-item-desc">設計重點在於空間的流動性與開放感。通過高效的動線規劃與材質對話，創造出既溫暖又不失現代感的生活場景。</p>
+            <div class="portfolio-item-meta">
+              <span class="meta-item">📍 台北市中山區</span>
+              <span class="meta-item">52坪</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 商務沈穩 - 案例1 -->
+        <article class="portfolio-item" data-category="commercial">
+          <div class="portfolio-item-image">
+            <img src="./img/collection/02_1.jpg" alt="菁英會所 - 會議室">
+            <div class="portfolio-item-overlay">
+              <button class="overlay-btn" data-project-id="04">檢視詳情</button>
+            </div>
+          </div>
+          <div class="portfolio-item-content">
+            <p class="portfolio-item-category">商務沈穩</p>
+            <h3>菁英會所</h3>
+            <p class="portfolio-item-desc">以深色木紋與石材打造高端會議空間。沉穩的配色與精準的光影設計，完美詮釋了專業與品味的結合。</p>
+            <div class="portfolio-item-meta">
+              <span class="meta-item">📍 台北市大安區</span>
+              <span class="meta-item">120坪</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 商務沈穩 - 案例2 -->
+        <article class="portfolio-item" data-category="commercial">
+          <div class="portfolio-item-image">
+            <img src="./img/collection/02_2.jpg" alt="企業總部 - 接待大廳">
+            <div class="portfolio-item-overlay">
+              <button class="overlay-btn" data-project-id="05">檢視詳情</button>
+            </div>
+          </div>
+          <div class="portfolio-item-content">
+            <p class="portfolio-item-category">商務沈穩</p>
+            <h3>企業總部</h3>
+            <p class="portfolio-item-desc">打造企業品牌形象的關鍵接待空間。運用冷色調石材與溫暖的間接照明，營造信任感與高級感共存的商務氛圍。</p>
+            <div class="portfolio-item-meta">
+              <span class="meta-item">📍 台北市信義區</span>
+              <span class="meta-item">180坪</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 商務沈穩 - 案例3 -->
+        <article class="portfolio-item" data-category="commercial">
+          <div class="portfolio-item-image">
+            <img src="./img/collection/02_3.jpg" alt="私人辦公室 - 工作區">
+            <div class="portfolio-item-overlay">
+              <button class="overlay-btn" data-project-id="06">檢視詳情</button>
+            </div>
+          </div>
+          <div class="portfolio-item-content">
+            <p class="portfolio-item-category">商務沈穩</p>
+            <h3>私人辦公室</h3>
+            <p class="portfolio-item-desc">為企業主打造獨特的辦公室。透過訂製傢俱與藝術品搭配，既維持專業氣質，又展現個人品味與地位象徵。</p>
+            <div class="portfolio-item-meta">
+              <span class="meta-item">📍 台北市中山區</span>
+              <span class="meta-item">85坪</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 輕奢雅居 - 案例1 -->
+        <article class="portfolio-item" data-category="luxury">
+          <div class="portfolio-item-image">
+            <img src="./img/collection/03_1.jpg" alt="雲端居所 - 客廳">
+            <div class="portfolio-item-overlay">
+              <button class="overlay-btn" data-project-id="07">檢視詳情</button>
+            </div>
+          </div>
+          <div class="portfolio-item-content">
+            <p class="portfolio-item-category">輕奢雅居</p>
+            <h3>雲端居所</h3>
+            <p class="portfolio-item-desc">精緻與簡約完美平衡的設計典範。運用頂級石材、絲絨面料與柔和光影，打造出雅緻而不張揚的高質感生活場景。</p>
+            <div class="portfolio-item-meta">
+              <span class="meta-item">📍 台北市信義區</span>
+              <span class="meta-item">95坪</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 輕奢雅居 - 案例2 -->
+        <article class="portfolio-item" data-category="luxury">
+          <div class="portfolio-item-image">
+            <img src="./img/collection/03_2.jpg" alt="晶悅居邸 - 臥房">
+            <div class="portfolio-item-overlay">
+              <button class="overlay-btn" data-project-id="08">檢視詳情</button>
+            </div>
+          </div>
+          <div class="portfolio-item-content">
+            <p class="portfolio-item-category">輕奢雅居</p>
+            <h3>晶悅居邸</h3>
+            <p class="portfolio-item-desc">為業主創造絕對私密的豪華臥房空間。透過頂級面料、低調金屬配飾與精心設計的燈光系統，營造睡眠與放鬆的絕佳環境。</p>
+            <div class="portfolio-item-meta">
+              <span class="meta-item">📍 台北市大安區</span>
+              <span class="meta-item">110坪</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 輕奢雅居 - 案例3 -->
+        <article class="portfolio-item" data-category="luxury">
+          <div class="portfolio-item-image">
+            <img src="./img/collection/03_3.jpg" alt="藝術軒居 - 展示區">
+            <div class="portfolio-item-overlay">
+              <button class="overlay-btn" data-project-id="09">檢視詳情</button>
+            </div>
+          </div>
+          <div class="portfolio-item-content">
+            <p class="portfolio-item-category">輕奢雅居</p>
+            <h3>藝術軒居</h3>
+            <p class="portfolio-item-desc">以藝術品收藏為核心的精緻居家。結合博物館級的展示手法與生活空間的設計，讓收藏成為空間的靈魂。</p>
+            <div class="portfolio-item-meta">
+              <span class="meta-item">📍 台北市信義區</span>
+              <span class="meta-item">150坪</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <!-- 作品詳情模態框 -->
+  <div class="portfolio-detail" id="portfolioDetail">
+    <div class="detail-modal">
+      <button class="detail-close" id="detailClose">×</button>
+      <div class="detail-gallery">
+        <img id="detailImage" src="" alt="">
+      </div>
+      <div class="detail-content">
+        <p class="detail-category" id="detailCategory"></p>
+        <div class="detail-header">
+          <h2 id="detailTitle"></h2>
+        </div>
+        <div class="detail-info">
+          <div class="info-block">
+            <h4>位置</h4>
+            <p id="detailLocation"></p>
+          </div>
+          <div class="info-block">
+            <h4>面積</h4>
+            <p id="detailArea"></p>
+          </div>
+          <div class="info-block">
+            <h4>風格分類</h4>
+            <p id="detailStyle"></p>
+          </div>
+        </div>
+        <div class="detail-description" id="detailDesc"></div>
+        <div class="detail-highlights">
+          <h4>設計亮點</h4>
+          <ul class="highlights-list" id="detailHighlights"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 即時聊天 -->
+  <div class="live-chat-widget" id="chatWidget">
+    <img src="./assets/logo.svg" alt="chat" class="icon" id="chatIcon">
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-message bot">您好！我是九維設計助手，有什麼可以幫助您的嗎？</div>
+    </div>
+    <div class="chat-input-area" id="chatInput">
+      <input type="text" class="chat-input" id="chatInputField" placeholder="輸入您的問題...">
+      <button class="chat-send" id="chatSend">發送</button>
+    </div>
+  </div>
+
+  <script src="./assets/scripts.js" defer></script>
+  <script>
+    // 作品集頁面特定功能
+    document.addEventListener('DOMContentLoaded', function () {
+      const projectData = {
+        '01': {
+          title: '青山雅居',
+          category: '居家現代',
+          location: '台北市信義區',
+          area: '45坪',
+          style: '溫潤木質與深棕線條',
+          desc: '本案位於台北市信義區，以溫潤木質與現代俐落線條為設計主軸。透過深棕色系的運用與自然光影的掌握，打造出既舒適又富有質感的居家場域。客廳以開放式設計突出空間流動性，臥房則強調私密性與放鬆氛圍。',
+          highlights: [
+            '頂級橡木傢俱搭配深棕色石材',
+            '間接照明系統營造層次感',
+            '開放式廚房設計與生活區完美融合',
+            '訂製軟裝搭配提升質感',
+            '環保建材與永續設計理念'
+          ]
+        },
+        '02': {
+          title: '木色時光',
+          category: '居家現代',
+          location: '台北市內湖區',
+          area: '68坪',
+          style: '溫潤木質與深棕線條',
+          desc: '位於內湖的現代居家，以橡木與灰色系為主調。設計理念在於創造一個靜謐的私密空間，讓居住者能在忙碌的都市生活中找到寧靜。每一個角落都體現對細節的堅持，從傢俱選擇到光影配置。',
+          highlights: [
+            '環保橡木全室應用',
+            '灰色系色彩層疊構圖',
+            '低調黃銅配件點綴',
+            '智能照明系統',
+            '大面積儲納空間設計'
+          ]
+        },
+        '03': {
+          title: '漫步空間',
+          category: '居家現代',
+          location: '台北市中山區',
+          area: '52坪',
+          style: '溫潤木質與深棕線條',
+          desc: '設計重點在於空間流動性的營造。通過高效的動線規劃，讓每個區域既獨立又相互連結。材質的對話與色彩的過渡，創造出既溫暖又不失現代感的生活場景。',
+          highlights: [
+            '開放式平面規劃',
+            '多功能家具配置',
+            '自然通風與採光設計',
+            '色彩過渡的視覺層次',
+            '內嵌式收納系統'
+          ]
+        },
+        '04': {
+          title: '菁英會所',
+          category: '商務沈穩',
+          location: '台北市大安區',
+          area: '120坪',
+          style: '高級會客與辦公空間',
+          desc: '以深色木紋與高質感石材打造高端商務空間。沉穩的配色與精準的光影設計，完美詮釋了專業精神與高級品味的結合。會議室採用隱私保護設計，接待區展現企業形象。',
+          highlights: [
+            '沉香木質商業傢俱',
+            '義大利進口石材應用',
+            '專業級隔音系統',
+            '商業照明設計',
+            '無線簡報系統整合'
+          ]
+        },
+        '05': {
+          title: '企業總部',
+          category: '商務沈穩',
+          location: '台北市信義區',
+          area: '180坪',
+          style: '高級會客與辦公空間',
+          desc: '企業形象的關鍵展示空間。運用冷色調石材與溫暖的間接照明營造信任感，結合企業品牌色彩與標誌元素融入空間設計，打造獨特的企業識別空間。',
+          highlights: [
+            '大規模接待大廳設計',
+            '企業品牌色彩整合',
+            '藝術品展示空間',
+            '多功能會議室',
+            '員工休閒區設計'
+          ]
+        },
+        '06': {
+          title: '私人辦公室',
+          category: '商務沈穩',
+          location: '台北市中山區',
+          area: '85坪',
+          style: '高級會客與辦公空間',
+          desc: '為企業主打造獨特的行政辦公室。透過訂製傢俱與當代藝術品搭配，既維持專業氣質，又展現個人品味與社會地位象徵。設計強調隱私、舒適與效率。',
+          highlights: [
+            '訂製行政辦公傢俱',
+            '當代藝術品收藏展示',
+            '獨立會客區域',
+            '智能辦公系統',
+            '品茶區與放鬆空間'
+          ]
+        },
+        '07': {
+          title: '雲端居所',
+          category: '輕奢雅居',
+          location: '台北市信義區',
+          area: '95坪',
+          style: '精緻細節與自然材質',
+          desc: '精緻與簡約完美平衡的設計典範。運用頂級石材、高級絲絨面料與柔和光影，打造出雅緻而不張揚的高質感生活場景。每一件傢俱都經過精心挑選，體現業主的生活品味。',
+          highlights: [
+            '進口義大利大理石應用',
+            '頂級歐洲絲絨面料',
+            '水晶吊燈與壁燈搭配',
+            '藝術品收藏展示區',
+            '私人酒窖設計'
+          ]
+        },
+        '08': {
+          title: '晶悅居邸',
+          category: '輕奢雅居',
+          location: '台北市大安區',
+          area: '110坪',
+          style: '精緻細節與自然材質',
+          desc: '為業主創造絕對私密與豪華的臥房空間。透過頂級面料、低調金屬配飾與精心設計的智能燈光系統，營造完美的睡眠與放鬆環境。衣帽間設計滿足高端生活需求。',
+          highlights: [
+            '進口雲端絲棉寢具區',
+            '低調金屬配飾細節',
+            '智能調光與溫度系統',
+            '開放式衣帽間',
+            '獨立浴室與SPA區'
+          ]
+        },
+        '09': {
+          title: '藝術軒居',
+          category: '輕奢雅居',
+          location: '台北市信義區',
+          area: '150坪',
+          style: '精緻細節與自然材質',
+          desc: '以藝術品收藏為核心的精緻居家設計。結合博物館級的展示手法與生活空間的設計，讓收藏成為空間的靈魂。每個展示區都配備專業照明與濕度控制，確保藝術品的安全與美觀。',
+          highlights: [
+            '博物館級展示照明',
+            '溫濕度自動控制系統',
+            '訂製美術櫃展示',
+            '藝術品專業打光',
+            '私人美術館概念設計'
+          ]
+        }
+      };
+
+      // 篩選功能
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+          const filter = this.getAttribute('data-filter');
+          
+          filterBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+
+          portfolioItems.forEach((item, index) => {
+            const category = item.getAttribute('data-category');
+            const isMatch = filter === 'all' || category === filter;
+            
+            item.classList.toggle('hidden', !isMatch);
+            if (isMatch) {
+              setTimeout(() => {
+                item.style.animationDelay = `${index * 0.1}s`;
+              }, 50);
+            }
+          });
+        });
+      });
+
+      // 詳情彈窗功能
+      const portfolioDetail = document.getElementById('portfolioDetail');
+      const detailClose = document.getElementById('detailClose');
+      const overlayBtns = document.querySelectorAll('.overlay-btn');
+
+      overlayBtns.forEach(btn => {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          const projectId = this.getAttribute('data-project-id');
+          const data = projectData[projectId];
+
+          if (data) {
+            document.getElementById('detailImage').src = `./img/collection/${projectId}_1.jpg`;
+            document.getElementById('detailCategory').textContent = data.category;
+            document.getElementById('detailTitle').textContent = data.title;
+            document.getElementById('detailLocation').textContent = data.location;
+            document.getElementById('detailArea').textContent = data.area;
+            document.getElementById('detailStyle').textContent = data.style;
+            document.getElementById('detailDesc').textContent = data.desc;
+
+            const highlightsList = document.getElementById('detailHighlights');
+            highlightsList.innerHTML = '';
+            data.highlights.forEach(highlight => {
+              const li = document.createElement('li');
+              li.textContent = highlight;
+              highlightsList.appendChild(li);
+            });
+
+            portfolioDetail.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          }
+        });
+      });
+
+      detailClose.addEventListener('click', function () {
+        portfolioDetail.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      });
+
+      portfolioDetail.addEventListener('click', function (e) {
+        if (e.target === this) {
+          this.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        }
+      });
+
+      // 鍵盤關閉
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          portfolioDetail.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
