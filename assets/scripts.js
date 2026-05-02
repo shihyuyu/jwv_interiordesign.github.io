@@ -1,3 +1,27 @@
+// Splash Screen Logic
+window.addEventListener('load', function () {
+  setTimeout(function () {
+    const splashOverlay = document.getElementById('splashOverlay');
+    if (splashOverlay) {
+      splashOverlay.classList.add('fade-out');
+      setTimeout(function () {
+        splashOverlay.style.display = 'none';
+      }, 800);
+    }
+  }, 2500);
+});
+setTimeout(function () {
+  const splashOverlay = document.getElementById('splashOverlay');
+  if (splashOverlay) {
+    splashOverlay.classList.add('fade-out');
+    setTimeout(function () {
+      splashOverlay.style.display = 'none';
+    }, 800);
+  }
+}, 8000);
+
+// 原本的 carousel 等功能
+
 document.addEventListener('DOMContentLoaded', function () {
   const carousels = document.querySelectorAll('[data-carousel]');
 
