@@ -47,4 +47,71 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('resize', updateCarousel);
     updateCarousel();
   });
+
+      // 視差滾動效果
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const storyBg = document.querySelector('.story-bg');
+      storyBg.style.transform = `translateY(${scrolled * 0.5}px)`;
+    });
+
+    // 時間軸動畫
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.timeline-item').forEach(item => {
+      observer.observe(item);
+    });
+
+    
+    // 聊天功能
+    const chatWidget = document.getElementById('chatWidget');
+    const chatIcon = document.getElementById('chatIcon');
+    const chatMessages = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const chatInputField = document.getElementById('chatInputField');
+    const chatSend = document.getElementById('chatSend');
+
+    chatWidget.addEventListener('click', () => {
+      chatWidget.classList.toggle('expanded');
+      chatIcon.style.display = chatWidget.classList.contains('expanded') ? 'none' : 'block';
+      chatMessages.classList.toggle('show');
+      chatInput.classList.toggle('show');
+    });
+
+    chatSend.addEventListener('click', sendMessage);
+    chatInputField.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+
+    function sendMessage() {
+      const message = chatInputField.value.trim();
+      if (message) {
+        const userMessage = document.createElement('div');
+        userMessage.className = 'chat-message user';
+        userMessage.textContent = message;
+        chatMessages.appendChild(userMessage);
+        chatInputField.value = '';
+
+        // 模擬回覆
+        setTimeout(() => {
+          const botMessage = document.createElement('div');
+          botMessage.className = 'chat-message bot';
+          botMessage.textContent = '感謝您的訊息！我們的設計顧問會盡快與您聯繫。';
+          chatMessages.appendChild(botMessage);
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 1000);
+      }
+    }
+
 });
