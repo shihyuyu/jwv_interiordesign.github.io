@@ -72,6 +72,16 @@ document.addEventListener('DOMContentLoaded', function () {
     updateCarousel();
   });
 
+  const heroSlides = document.querySelectorAll('.hero-bg-carousel .bg-slide');
+  if (heroSlides.length > 1) {
+    let heroIndex = 0;
+    setInterval(() => {
+      heroSlides[heroIndex].classList.remove('active');
+      heroIndex = (heroIndex + 1) % heroSlides.length;
+      heroSlides[heroIndex].classList.add('active');
+    }, 5200);
+  }
+
       // 視差滾動效果
     window.addEventListener('scroll', () => {
       const scrolled = window.pageYOffset;
