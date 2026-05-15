@@ -100,42 +100,20 @@ document.addEventListener('DOMContentLoaded', function () {
     
     // 聊天功能
     const chatWidget = document.getElementById('chatWidget');
-    const chatIcon = document.getElementById('chatIcon');
-    const chatMessages = document.getElementById('chatMessages');
-    const chatInput = document.getElementById('chatInput');
-    const chatInputField = document.getElementById('chatInputField');
-    const chatSend = document.getElementById('chatSend');
+    const chatToggle = document.getElementById('chatToggle');
+    const chatPanel = document.getElementById('chatPanel');
 
-    chatWidget.addEventListener('click', () => {
+    chatToggle.addEventListener('click', (event) => {
+      event.stopPropagation();
       chatWidget.classList.toggle('expanded');
-      chatIcon.style.display = chatWidget.classList.contains('expanded') ? 'none' : 'block';
-      chatMessages.classList.toggle('show');
-      chatInput.classList.toggle('show');
+      chatToggle.style.display = 'none';
     });
 
-    chatSend.addEventListener('click', sendMessage);
-    chatInputField.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') sendMessage();
-    });
-
-    function sendMessage() {
-      const message = chatInputField.value.trim();
-      if (message) {
-        const userMessage = document.createElement('div');
-        userMessage.className = 'chat-message user';
-        userMessage.textContent = message;
-        chatMessages.appendChild(userMessage);
-        chatInputField.value = '';
-
-        // 模擬回覆
-        setTimeout(() => {
-          const botMessage = document.createElement('div');
-          botMessage.className = 'chat-message bot';
-          botMessage.textContent = '感謝您的訊息！我們的設計顧問會盡快與您聯繫。';
-          chatMessages.appendChild(botMessage);
-          chatMessages.scrollTop = chatMessages.scrollHeight;
-        }, 1000);
+    document.addEventListener('click', (event) => {
+      if (chatWidget.classList.contains('expanded') && !chatWidget.contains(event.target)) {
+        chatWidget.classList.remove('expanded');
+        chatToggle.style.display = '';
       }
-    }
+    });
 
 });

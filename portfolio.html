@@ -638,15 +638,29 @@
     </div>
   </div>
 
-  <!-- 即時聊天 -->
+  <!-- 聯絡選單 -->
   <div class="live-chat-widget" id="chatWidget">
-    <img src="./assets/logo.svg" alt="chat" class="icon" id="chatIcon">
-    <div class="chat-messages" id="chatMessages">
-      <div class="chat-message bot">您好！我是九維設計助手，有什麼可以幫助您的嗎？</div>
-    </div>
-    <div class="chat-input-area" id="chatInput">
-      <input type="text" class="chat-input" id="chatInputField" placeholder="輸入您的問題...">
-      <button class="chat-send" id="chatSend">發送</button>
+    <button type="button" class="chat-toggle" id="chatToggle" aria-label="開啟聯絡選單">
+      <img src="./assets/logo.svg" alt="九維設計 聯絡" class="icon">
+    </button>
+    <div class="chat-panel" id="chatPanel">
+      <div class="chat-options" id="chatOptions">
+        <a href="tel:+8862112345678" class="contact-link" aria-label="電話聯絡">
+          <span class="contact-icon icon-phone" title="電話"></span>
+        </a>
+        <a href="mailto:d1611007@gmail.com" class="contact-link" aria-label="Email 聯絡">
+          <span class="contact-icon icon-email" title="Email"></span>
+        </a>
+        <a href="https://www.facebook.com/leaderIDS/?locale=zh_TW" target="_blank" rel="noopener" class="contact-link" aria-label="Facebook">
+          <span class="contact-icon icon-fb" title="Facebook"></span>
+        </a>
+        <a href="https://www.instagram.com/jwv_interiordesign/" target="_blank" rel="noopener" class="contact-link" aria-label="Instagram">
+          <span class="contact-icon icon-instagram" title="Instagram"></span>
+        </a>
+        <a href="https://www.threads.com/@jwv_interiordesign/" target="_blank" rel="noopener" class="contact-link" aria-label="Threads">
+          <span class="contact-icon icon-line" title="line"></span>
+        </a>
+      </div>
     </div>
   </div>
 
