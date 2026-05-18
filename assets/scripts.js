@@ -22,6 +22,40 @@ setTimeout(function () {
 
 // 原本的 carousel 等功能
 
+// Navigation Toggle Logic
+document.addEventListener('DOMContentLoaded', function () {
+  const navToggle = document.querySelector('.nav-toggle');
+  const siteHeader = document.querySelector('.site-header');
+  const siteNav = document.querySelector('.site-nav');
+  
+  if (navToggle && siteHeader && siteNav) {
+    // Toggle nav on button click
+    navToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      siteHeader.classList.toggle('nav-open');
+      navToggle.setAttribute('aria-expanded', 
+        navToggle.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'
+      );
+    });
+    
+    // Close nav when clicking on a nav link
+    siteNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function () {
+        siteHeader.classList.remove('nav-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+    
+    // Close nav when clicking outside
+    document.addEventListener('click', function (e) {
+      if (!siteHeader.contains(e.target)) {
+        siteHeader.classList.remove('nav-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+});
+
 document.addEventListener('DOMContentLoaded', function () {
   const carousels = document.querySelectorAll('[data-carousel]');
 
