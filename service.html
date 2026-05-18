@@ -11,6 +11,25 @@
   <link rel="stylesheet" href="./assets/styles.css">
 </head>
 <body>
+  <!-- loading Screen Start -->
+  <div class="splash-overlay" id="splashOverlay">
+    <div class="splash-container">
+      <div class="splash-logo">
+        <span class="logo"></span>
+      </div>
+      <div class="splash-brand">
+        <h1 class="splash-brand-title">九維室內設計</h1>
+        <p class="splash-brand-subtitle">J W V D E S I G N</p>
+      </div>
+      <div class="splash-loader">
+        <span class="splash-dot"></span>
+        <span class="splash-dot"></span>
+        <span class="splash-dot"></span>
+      </div>
+    </div>
+  </div>
+  <!-- loading Screen End -->
+
   <div class="page-shell">
     <header class="site-header">
       <div class="brand-logo" aria-label="九維室內設計品牌標誌">
@@ -22,22 +41,21 @@
       </div>
       <nav class="site-nav">
         <a href="./index.html">首頁</a>
-        <a href="./index.html#about">品牌</a>
+        <a href="./about.html">品牌</a>
         <!-- <a href="./service.html">服務</a> -->
         <a href="./portfolio.html">作品</a>
-        <a href="./index.html#contact">聯繫</a>
-      </nav>
+        <a href="./contact.html">聯繫</a>
       </nav>
     </header>
 
     <main>
-      <section class="service-hero" id="service-hero">
+      <section class="service-hero section" id="service-hero">
         <p class="eyebrow">服務項目</p>
         <h1>從概念到落地，為每一處空間注入質感與詩意</h1>
         <p>九維室內設計結合專業流程與細緻美學，提供完整服務項目，協助生活與品牌空間同步升級。</p>
       </section>
 
-      <section class="section-services service-overview" aria-labelledby="service-overview-title">
+      <section class="section-services service-overview section" aria-labelledby="service-overview-title">
         <h2 id="service-overview-title" class="visually-hidden">服務概覽</h2>
         <article class="service-card">
           <span class="service-tag">空間規劃</span>
@@ -61,7 +79,7 @@
         </article>
       </section>
 
-      <section class="faq-section" id="faq" role="region" aria-labelledby="faq-title">
+      <section class="faq-section section" id="faq" role="region" aria-labelledby="faq-title">
         <p class="section-label">常見問題</p>
         <h2 id="faq-title">服務流程與專案細節</h2>
         <div class="faq-grid">
@@ -97,7 +115,7 @@
           </article>
         </div>
       </section>
-
+<!-- 
       <section class="section-contact" id="contact">
         <div class="contact-panel">
           <div>
@@ -105,9 +123,9 @@
             <h2>讓九維為您定義專屬服務方案</h2>
             <p>歡迎與我們預約設計諮詢，或提供需求讓我們為您規劃精準空間提案。</p>
             <div class="contact-info">
-              <div><strong>地址</strong><span>台北市中山區</span></div>
-              <div><strong>電話</strong><span>02-1234-5678</span></div>
-              <div><strong>Email</strong><span>hello@jwvdesign.tw</span></div>
+              <div><strong>地址</strong><span>104臺北市中山區恆安里雙城街3巷十二號14F</span></div>
+              <div><strong>電話</strong><span>+886 2 2595 2010</span></div>
+              <div><strong>Email</strong><span>d1611007@gmail.com</span></div>
             </div>
           </div>
           <form class="contact-form">
@@ -117,8 +135,37 @@
             <button type="submit" class="button button-primary">立即諮詢</button>
           </form>
         </div>
-      </section>
+      </section> -->
     </main>
   </div>
+
+  <!-- 聯絡選單 -->
+  <div class="live-chat-widget" id="chatWidget">
+    
+    <button type="button" class="chat-toggle" id="chatToggle" aria-label="開啟聯絡選單" title="聯絡我們">
+      <span class="logo logo-brand-image"></span>
+    </button>
+    <div class="chat-panel" id="chatPanel">
+      <div class="chat-options" id="chatOptions">
+        <a href="tel:+8862112345678" class="contact-link" aria-label="電話聯絡">
+          <span class="contact-icon icon-phone" title="電話"></span>
+        </a>
+        <a href="mailto:d1611007@gmail.com" class="contact-link" aria-label="Email 聯絡">
+          <span class="contact-icon icon-email" title="Email"></span>
+        </a>
+        <a href="https://www.facebook.com/leaderIDS/?locale=zh_TW" target="_blank" rel="noopener" class="contact-link" aria-label="Facebook">
+          <span class="contact-icon icon-fb" title="Facebook"></span>
+        </a>
+        <a href="https://www.instagram.com/jwv_interiordesign/" target="_blank" rel="noopener" class="contact-link" aria-label="Instagram">
+          <span class="contact-icon icon-instagram" title="Instagram"></span>
+        </a>
+        <a href="https://www.threads.com/@jwv_interiordesign/" target="_blank" rel="noopener" class="contact-link" aria-label="Threads">
+          <span class="contact-icon icon-line" title="line"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+    
+  <script src="./assets/scripts.js" defer></script>
 </body>
 </html>
